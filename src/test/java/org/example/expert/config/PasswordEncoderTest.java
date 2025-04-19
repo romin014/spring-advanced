@@ -20,7 +20,13 @@ class PasswordEncoderTest {
         String encodedPassword = passwordEncoder.encode(rawPassword);
 
         // when
-        boolean matches = passwordEncoder.matches(encodedPassword, rawPassword);
+        // public boolean matches(String rawPassword, String encodedPassword){...}
+        // matches 메서드의 변수가 String rawPassword, String encodedPassword 이므로
+        //(encodedPassword, rawPassword) -> (rawPassword, encodedPassword)
+
+        // boolean matches = passwordEncoder.matches(encodedPassword, rawPassword);
+        boolean matches = passwordEncoder.matches(rawPassword, encodedPassword);
+
 
         // then
         assertTrue(matches);
