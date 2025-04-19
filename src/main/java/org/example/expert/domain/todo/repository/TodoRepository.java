@@ -15,7 +15,10 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
     // N+1 문제 : 연관 관계가 설정된 엔티티를 조회할 경우 최초 조회 쿼리 1개를 포함하여 연관관계의 추가 조회 쿼리가 데이터 갯수(n)개 만큼 추가로 발생
     // 해결방법 : Fetch Join, @EntityGraph, @BatchSize, DTO 사용 등
     //
+    //Fetch Join을 사용한 경우
     //@Query("SELECT t FROM Todo t LEFT JOIN FETCH t.user u ORDER BY t.modifiedAt DESC")
+    //
+    //EntityGraph을 사용한 경우
     @Query("SELECT t FROM Todo t ORDER BY t.modifiedAt DESC")
     @EntityGraph(attributePaths = {"user"})
     Page<Todo> findAllByOrderByModifiedAtDesc(Pageable pageable);
