@@ -56,15 +56,20 @@ class ManagerServiceTest {
     @Test
     void todo의_user가_null인_경우_예외가_발생한다() {
         // given
+        // 인증된 유저 정보
         AuthUser authUser = new AuthUser(1L, "a@a.com", UserRole.USER);
         long todoId = 1L;
         long managerUserId = 2L;
 
+        // 객체 생성
         Todo todo = new Todo();
+        // 객체의 user 필드 null로 설정
         ReflectionTestUtils.setField(todo, "user", null);
 
+        //객체 생성
         ManagerSaveRequest managerSaveRequest = new ManagerSaveRequest(managerUserId);
 
+        //todoRepository의 findById 메서드 결과값 todo 결과 반환
         given(todoRepository.findById(todoId)).willReturn(Optional.of(todo));
 
         // when & then
